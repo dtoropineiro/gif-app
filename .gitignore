@@ -25,3 +25,6 @@ yarn.lock
 
 # Optional eslint cache
 .eslintcache
+
+# Environment
+.env
