@@ -1,6 +1,13 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {GifGridItem} from '../components/GifGridItem'
 
 export const GifGrid = ({category}) => {
+
+    const [images, setImages] = useState([])
+
+    useEffect(() => {
+        getGifs();
+    }, [])
 
     const getGifs = async() => {
         const apiKey = process.env.REACT_APP_API_KEY
@@ -16,12 +23,21 @@ export const GifGrid = ({category}) => {
             }
         })
         console.log(gifs)
+        setImages(gifs);
     }
 
-    getGifs();
+
     return (
         <div>
             <h3>{category}</h3>
+                {
+                    images.map( (image) => (
+                        <GifGridItem 
+                            key={image.id}
+                            {...image}
+                        />
+                    ))
+                }
         </div>
     )
 }
